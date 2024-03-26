@@ -1,0 +1,91 @@
+---
+    import '@/styles/globals.css'
+    const { title } = Astro.props
+    import { MoveRight } from "lucide-react"
+
+    const path = Astro.url.pathname
+---
+
+<script is:inline>
+	const getThemePreference = () => {
+		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+			return localStorage.getItem('theme');
+		}
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	};
+	const isDark = getThemePreference() === 'dark';
+	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+ 
+	if (typeof localStorage !== 'undefined') {
+		const observer = new MutationObserver(() => {
+			const isDark = document.documentElement.classList.contains('dark');
+			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+		});
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+	}
+</script>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+        <div class="w-full sticky top-0">
+            <nav class="w-full max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+                <span class="text-2xl font-bold">Video tools</span>
+                <ul class="flex items-center gap-4">
+                    <li>
+                        <a 
+                        href="/" 
+                        class="flex items-end gap-2 font-medium border-foreground hover:border-b aria-[current='page']:border-b" 
+                        aria-current={path === "/" ? "page" : "false"}
+                        >
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                        href="/gif" 
+                        class="flex items-end gap-2 font-medium border-foreground hover:border-b aria-[current='page']:border-b" 
+                        aria-current={path === "/gif" ? "page" : "false"}
+                        >
+                            Video<MoveRight className='size-4 mb-[2px]' />GIF
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                        href="/video-audio" 
+                        class="flex items-end gap-2 font-medium border-foreground hover:border-b aria-[current='page']:border-b" 
+                        aria-current={path === "/video-audio" ? "page" : "false"}
+                        >
+                            Video<MoveRight className='size-4 mb-[2px]' />Audio
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                        href="/video" 
+                        class="flex items-end gap-2 font-medium border-foreground hover:border-b aria-[current='page']:border-b" 
+                        aria-current={path === "/video" ? "page" : "false"}
+                        >
+                            Video converter
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                        href="/audio" 
+                        class="flex items-end gap-2 font-medium border-foreground hover:border-b aria-[current='page']:border-b" 
+                        aria-current={path === "/audio" ? "page" : "false"}
+                        >
+                            Audio converter
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+		<slot />
+	</body>
+</html>

@@ -1,16 +1,62 @@
 ---
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import Layout from "@/layouts/baselayout.astro"
+import { MoveRight } from "lucide-react"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Astro">
+	<main class="w-full max-w-3xl mx-auto px-6 py-12">
+		<h1 class="text-center text-4xl font-bold">Video tools</h1>
+		<p class="text-center text-lg max-w-lg mx-auto mt-3">
+			This is a set of tools for converting video and audio. 
+			It runs in the browser but utilizes your hardware to get the best of both worlds.
+			Native app performance without needing to download anything. 
+			<a href="https://joar.vercel.app" target="_blank" class="underline underline-offset-4">Read more here!</a>
+		</p>
+		<div class="grid sm:grid-cols-2 gap-4 mt-8">
+			<a href="/gif" class="group outline-none">
+				<Card className="hover:border-foreground hover:bg-accent/50 group-focus-visible:border-foreground group-focus-visible:bg-accent/50 transition-colors ease-linear">
+					<CardHeader>
+						<CardTitle className="flex gap-2 items-end">Video<MoveRight className='size-4' />GIF</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<p>Convert videos to GIFs</p>
+					</CardContent>
+				</Card>
+			</a>
+
+			<a href="/video-audio" class="group outline-none">
+				<Card className="hover:border-foreground hover:bg-accent/50 group-focus-visible:border-foreground group-focus-visible:bg-accent/50 transition-colors ease-linear">
+					<CardHeader>
+						<CardTitle className="flex gap-2 items-end">Video<MoveRight className='size-4' />Audio</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<p>Extract audio from video</p>
+					</CardContent>
+				</Card>
+			</a>
+
+			<a href="/video" class="group outline-none">
+				<Card className="hover:border-foreground hover:bg-accent/50 group-focus-visible:border-foreground group-focus-visible:bg-accent/50 transition-colors ease-linear">
+					<CardHeader>
+						<CardTitle className="flex gap-2 items-end">Video converter</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<p>Convert video formats</p>
+					</CardContent>
+				</Card>
+			</a>
+
+			<a href="/audio" class="group outline-none">
+				<Card className="hover:border-foreground hover:bg-accent/50 group-focus-visible:border-foreground group-focus-visible:bg-accent/50 transition-colors ease-linear">
+					<CardHeader>
+						<CardTitle className="flex gap-2 items-end">Audio converter</CardTitle>
+					</CardHeader>
+					<CardContent>
+						<p>Convert audio formats</p>
+					</CardContent>
+				</Card>
+			</a>
+		</div>
+	</main>
+</Layout>
